@@ -1,0 +1,23 @@
+# Основные зависимости
+numpy
+pandas
+scikit-learn
+
+# Обработка естественного языка
+spacy
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0-py3-none-any.whl
+transformers
+
+# Работа с онтологиями
+rdflib
+owlready2
+
+# База данных
+couchdb
+
+# Пользовательский интерфейс (если используется)
+PyQt5
+
+# Другие зависимости
+requests
+torch

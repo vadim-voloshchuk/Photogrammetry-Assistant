@@ -1,0 +1,14 @@
+{
+    "name": "Good GPS Signal",
+    "description": "Наличие хорошего сигнала GPS во время съемки.",
+    "ontology_class": "Condition",
+    "ontology_properties": {
+      "affects": [
+        "Geolocation Accuracy"
+      ],
+      "recommended_for": [
+        "Aerial Photography",
+        "Drone Mapping"
+      ]
+    }
+  }

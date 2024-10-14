@@ -1,0 +1,15 @@
+{
+    "name": "High Accuracy",
+    "description": "Требование высокой точности результатов фотограмметрической обработки.",
+    "ontology_class": "DesiredResult",
+    "ontology_properties": {
+      "related_to": [
+        "Measurement Accuracy",
+        "Model Accuracy"
+      ],
+      "achieved_by": [
+        "Bundle Adjustment",
+        "Ground Control Points"
+      ]
+    }
+  }

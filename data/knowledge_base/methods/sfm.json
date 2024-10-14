@@ -1,0 +1,62 @@
+{
+    "name": "Structure from Motion",
+    "description": "Метод построения 3D-модели объекта по набору фотографий, сделанных с разных ракурсов.",
+    "input_data": [
+      {
+        "name": "Images",
+        "description": "Набор фотографий объекта, сделанных с разных ракурсов.",
+        "ontology_class": "InputData",
+        "ontology_properties": {
+          "format": "JPEG, PNG"
+        }
+      }
+    ],
+    "output_data": [
+      {
+        "name": "3D Model",
+        "description": "Трехмерная модель объекта.",
+        "ontology_class": "OutputData",
+        "ontology_properties": {
+          "format": "OBJ, PLY"
+        }
+      },
+      {
+        "name": "Point Cloud",
+        "description": "Облако точек, представляющее поверхность объекта.",
+        "ontology_class": "OutputData",
+        "ontology_properties": {
+          "format": "PLY, LAS"
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "name": "Overlap",
+        "description": "Перекрытие между фотографиями должно быть не менее 60%.",
+        "ontology_class": "Condition",
+        "ontology_properties": {
+          "threshold": 0.6
+        }
+      },
+      {
+        "name": "Good Lighting",
+        "description": "Хорошее освещение объекта.",
+        "ontology_class": "Condition"
+      }
+    ],
+    "advantages": [
+      "Высокая точность",
+      "Автоматизация процесса"
+    ],
+    "limitations": [
+      "Высокая вычислительная сложность",
+      "Чувствительность к шуму на изображениях"
+    ],
+    "ontology_class": "Method",
+    "ontology_properties": {
+      "suitable_for": [
+        "3D Modeling",
+        "Object Reconstruction"
+      ]
+    }
+  }

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:photogrammetry="http://example.com/photogrammetry#"
+  xml:base="http://example.com/photogrammetry">
+  <owl:Ontology rdf:about="http://example.com/photogrammetry#"/>
+  
+
+
+  <!-- Классы -->
+
+  <owl:Class rdf:about="photogrammetry:Method">
+    <rdfs:subClassOf rdf:resource="owl:Thing"/>
+    <rdfs:comment>Класс, представляющий метод фотограмметрии.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="photogrammetry:InputData">
+    <rdfs:subClassOf rdf:resource="owl:Thing"/>
+    <rdfs:comment>Класс, представляющий входные данные метода.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="photogrammetry:OutputData">
+    <rdfs:subClassOf rdf:resource="owl:Thing"/>
+    <rdfs:comment>Класс, представляющий выходные данные метода.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="photogrammetry:Condition">
+    <rdfs:subClassOf rdf:resource="owl:Thing"/>
+    <rdfs:comment>Класс, представляющий условие съемки.</rdfs:comment>
+  </owl:Class>
+  
+
+
+  <!-- Свойства -->
+
+  <owl:ObjectProperty rdf:about="photogrammetry:hasInputData">
+    <rdfs:domain rdf:resource="photogrammetry:Method"/>
+    <rdfs:range rdf:resource="photogrammetry:InputData"/>
+    <rdfs:comment>Метод имеет входные данные.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="photogrammetry:hasOutputData">
+    <rdfs:domain rdf:resource="photogrammetry:Method"/>
+    <rdfs:range rdf:resource="photogrammetry:OutputData"/>
+    <rdfs:comment>Метод имеет выходные данные.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="photogrammetry:requiresCondition">
+    <rdfs:domain rdf:resource="photogrammetry:Method"/>
+    <rdfs:range rdf:resource="photogrammetry:Condition"/>
+    <rdfs:comment>Метод требует выполнения условия.</rdfs:comment>
+  </owl:ObjectProperty>
+  
+
+
+  <!-- Индивиды (примеры) -->
+
+  <photogrammetry:Method rdf:about="photogrammetry:StructureFromMotion">
+    <rdfs:label>Structure from Motion</rdfs:label>
+  </photogrammetry:Method>
+
+  <photogrammetry:InputData rdf:about="photogrammetry:Images">
+    <rdfs:label>Images</rdfs:label>
+  </photogrammetry:InputData>
+
+  <photogrammetry:OutputData rdf:about="photogrammetry:3DModel">
+    <rdfs:label>3D Model</rdfs:label>
+  </photogrammetry:OutputData>
+
+  <photogrammetry:Condition rdf:about="photogrammetry:GoodLighting">
+    <rdfs:label>Good Lighting</rdfs:label>
+  </photogrammetry:Condition>
+  
+
+
+  <!-- Связи между индивидами (примеры) -->
+
+  <rdf:Statement rdf:about="photogrammetry:StructureFromMotion">
+    <photogrammetry:hasInputData rdf:resource="photogrammetry:Images"/>
+  </rdf:Statement>
+
+  <rdf:Statement rdf:about="photogrammetry:StructureFromMotion">
+    <photogrammetry:hasOutputData rdf:resource="photogrammetry:3DModel"/>
+  </rdf:Statement>
+
+  <rdf:Statement rdf:about="photogrammetry:StructureFromMotion">
+    <photogrammetry:requiresCondition rdf:resource="photogrammetry:GoodLighting"/>
+  </rdf:Statement>
+
+</rdf:RDF>

@@ -1,0 +1,70 @@
+{
+    "name": "Aerial Triangulation",
+    "description": "Метод определения координат точек на земной поверхности по аэрофотоснимкам.",
+    "input_data": [
+      {
+        "name": "Aerial Images",
+        "description": "Набор аэрофотоснимков, перекрывающихся между собой.",
+        "ontology_class": "InputData",
+        "ontology_properties": {
+          "format": "JPEG, TIFF"
+        }
+      },
+      {
+        "name": "Ground Control Points (GCPs)",
+        "description": "Координаты опорных точек на земной поверхности.",
+        "ontology_class": "InputData",
+        "ontology_properties": {
+          "format": "Text file (CSV, TXT)"
+        }
+      }
+    ],
+    "output_data": [
+      {
+        "name": "Georeferenced Images",
+        "description": "Аэрофотоснимки, привязанные к системе координат.",
+        "ontology_class": "OutputData",
+        "ontology_properties": {
+          "format": "GeoTIFF"
+        }
+      },
+      {
+        "name": "Point Cloud",
+        "description": "Облако точек, представляющее земную поверхность.",
+        "ontology_class": "OutputData",
+        "ontology_properties": {
+          "format": "LAS, XYZ"
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "name": "Overlap",
+        "description": "Перекрытие между аэрофотоснимками должно быть не менее 60%.",
+        "ontology_class": "Condition",
+        "ontology_properties": {
+          "threshold": 0.6
+        }
+      },
+      {
+        "name": "Accurate GCPs",
+        "description": "Опорные точки должны быть измерены с высокой точностью.",
+        "ontology_class": "Condition"
+      }
+    ],
+    "advantages": [
+      "Высокая точность геопривязки",
+      "Возможность обработки больших территорий"
+    ],
+    "limitations": [
+      "Требуется наличие опорных точек",
+      "Высокая вычислительная сложность"
+    ],
+    "ontology_class": "Method",
+    "ontology_properties": {
+      "suitable_for": [
+        "Orthophoto Production",
+        "Terrain Mapping"
+      ]
+    }
+  }

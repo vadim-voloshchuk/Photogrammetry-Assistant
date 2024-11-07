@@ -1,20 +1,8 @@
-import sys
+from flask import Flask
+from api.routes import api_bp
 
-from PyQt5.QtWidgets import QApplication
+app = Flask(__name__)
+app.register_blueprint(api_bp, url_prefix='/api')
 
-from src.ui.main_window import MainWindow
-
-
-def main():
-    """
-    Точка входа в приложение.
-    """
-
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app.run(debug=True)

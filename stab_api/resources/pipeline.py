@@ -58,8 +58,8 @@ class Results(Resource):
         return jsonify({
             "task_id": 1,
             "output": [
-                {"name": "3D модель", "type": "model", "url": "/static/models/3d_model.obj"},
-                {"name": "Облако точек", "type": "point_cloud", "url": "/static/point_cloud/point_cloud.ply"}
+                {"name": "3D модель", "type": "model", "url": "/static/images/img1_thumb.jpg"},
+                {"name": "Облако точек", "type": "point_cloud", "url": "/static/images/img1_thumb.jpg"}
             ]
         })
 
@@ -69,7 +69,7 @@ class Images(Resource):
         return jsonify({
             "images": [
                 {"url": "/static/images/img1_thumb.jpg", "name": "Изображение 1"},
-                {"url": "/static/images/img2_thumb.jpg", "name": "Изображение 2"},
-                {"url": "/static/images/img3_thumb.jpg", "name": "Изображение 3"}
+                {"url": "/static/images/img1_thumb.jpg", "name": "Изображение 2"},
+                {"url": "/static/images/img1_thumb.jpg", "name": "Изображение 3"}
             ]
         })

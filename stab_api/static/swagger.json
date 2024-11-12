@@ -1,0 +1,259 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Photogrammetry Assistant API",
+        "version": "1.0.0",
+        "description": "API для работы с задачами фотограмметрии."
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+        "/tasks": {
+            "get": {
+                "summary": "Получить список задач",
+                "responses": {
+                    "200": {
+                        "description": "Список задач",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "tasks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": { "type": "integer" },
+                                            "name": { "type": "string" },
+                                            "description": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Создать задачу",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "task",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "description": { "type": "string" },
+                                "category": { "type": "string" },
+                                "difficulty": { "type": "string" },
+                                "priority": { "type": "integer" }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Задача успешно создана",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": { "type": "string" },
+                                "task": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "integer" },
+                                        "name": { "type": "string" },
+                                        "description": { "type": "string" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload": {
+            "post": {
+                "summary": "Загрузить данные для обработки",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "uploadData",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "task_id": { "type": "integer" },
+                                "image_files": {
+                                    "type": "array",
+                                    "items": { "type": "string" }
+                                },
+                                "text": { "type": "string" }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные успешно загружены",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": { "type": "string" },
+                                "task_id": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "uploaded_images": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "filename": { "type": "string" },
+                                            "status": { "type": "string" },
+                                            "size": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Некорректные данные запроса",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": { "type": "string" },
+                                "message": { "type": "string" }
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Неподдерживаемый формат изображения",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": { "type": "string" },
+                                "message": { "type": "string" }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": { "type": "string" },
+                                "message": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pipeline": {
+            "get": {
+                "summary": "Получить пайплайн обработки для задачи",
+                "responses": {
+                    "200": {
+                        "description": "Структура пайплайна",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nodes": { "type": "array" },
+                                "edges": { "type": "array" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pipeline/status": {
+            "get": {
+                "summary": "Получить статус выполнения пайплайна",
+                "responses": {
+                    "200": {
+                        "description": "Статус выполнения пайплайна",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "current_step": { "type": "string" },
+                                "progress_percentage": { "type": "integer" },
+                                "logs": { "type": "array", "items": { "type": "string" } }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pipeline/start": {
+            "post": {
+                "summary": "Запуск пайплайна обработки данных",
+                "responses": {
+                    "200": {
+                        "description": "Пайплайн запущен",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": { "type": "string" },
+                                "status": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/results": {
+            "get": {
+                "summary": "Получить результаты обработки",
+                "responses": {
+                    "200": {
+                        "description": "Результаты обработки",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "task_id": { "type": "integer" },
+                                "output": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": { "type": "string" },
+                                            "type": { "type": "string" },
+                                            "url": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/images": {
+            "get": {
+                "summary": "Получить изображения для загрузки",
+                "responses": {
+                    "200": {
+                        "description": "Список изображений для загрузки",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "url": { "type": "string" },
+                                            "name": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

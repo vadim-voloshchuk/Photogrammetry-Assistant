@@ -1,0 +1,4 @@
+Flask
+Flask-Cors  # для работы с CORS, если фронт и бэкенд на разных серверах
+Flask-RESTful
+flask-swagger-ui
